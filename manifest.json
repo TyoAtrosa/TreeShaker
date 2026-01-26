@@ -1,0 +1,10 @@
+{
+   "Name": "TreeShaker",
+   "Author": "The Atrosa System",
+   "Version": "1.6.0",
+   "Description": "Automatically shakes seeds from your trees.",
+   "UniqueID": "TyoAtrosa.Treeshaker",
+   "EntryDll": "TreeShaker.dll",
+   "MinimumApiVersion": "4.4.0",
+   "UpdateKeys": ["GitHub: TyoAtrosa/TreeShaker"]
+}
