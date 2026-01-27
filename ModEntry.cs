@@ -4,13 +4,21 @@ using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.Objects;
 using StardewValley.TerrainFeatures;
+using static StardewValley.Minigames.BoatJourney;
 using SObject = StardewValley.Object;
 
 namespace TreeShaker
 {
     public sealed class ModConfig
     {
+        
         public Vector2 ChestCoords = new(69f, 16f);
+        public string DefaultCoordinates = "next to the Default farm Mailbox are 69,16.";
+        
+        public bool CheckForSeeds = true;
+        public string seedcheck = "Checks if trees actually have seeds, if false just gives a seed for every tree present.";
+        public bool CleanupGroundSeeds = false;
+        public string cleanup = "if Enabled, picks up seeds from the ground, preventing more trees from growing.";
     }
     /// <summary>The mod entry point.</summary>
     internal sealed class ModEntry : Mod
@@ -33,8 +41,9 @@ namespace TreeShaker
                     foreach (KeyValuePair<Vector2, TerrainFeature> pair in location.terrainFeatures.Pairs)
                     {
                         Vector2 tile = pair.Key;
-                        if (!(pair.Value is Tree tree))
-
+                        if (pair.Value is not Tree tree)
+                            continue;
+                        if (this.Config.CheckForSeeds == true & tree.hasSeed.Value == false)
                             continue;
                         {
                             bool added = false;
@@ -61,16 +70,44 @@ namespace TreeShaker
                                         added = true;
                                     }
                                     break;
-                                case "4":
-                                    Item h = chest.addItem(new SObject("292", 1));
-                                    if (h == null)
+                                case "6":
+                                    Item c = chest.addItem(new SObject("88", 1));
+                                    if (c == null)
                                     {
                                         added = true;
                                     }
                                     break;
-                                case "5":
-                                    Item r = chest.addItem(new SObject("MossySeed", 1));
-                                    if (r == null)
+                                case "7":
+                                    Item M = chest.addItem(new SObject("891", 1));
+                                    if (M == null)
+                                    {
+                                        added = true;
+                                    }
+                                    break;
+                                case "8":
+                                    Item n = chest.addItem(new SObject("292", 1));
+                                    if (n == null)
+                                    {
+                                        added = true;
+                                    }
+                                    break;
+                                case "10":
+                                    Item r1 = chest.addItem(new SObject("MossySeed", 1));
+                                    if (r1 == null)
+                                    {
+                                        added = true;
+                                    }
+                                    break;
+                                case "11":
+                                    Item r2 = chest.addItem(new SObject("MossySeed", 1));
+                                    if (r2 == null)
+                                    {
+                                        added = true;
+                                    }
+                                    break;
+                                case "12":
+                                    Item r3 = chest.addItem(new SObject("MossySeed", 1));
+                                    if (r3 == null)
                                     {
                                         added = true;
                                     }
@@ -81,7 +118,7 @@ namespace TreeShaker
                             {
                                 tree.hasSeed.Value = false;
                             }
-                            if (added && tree.growthStage.Value == Tree.seedStage)
+                            if (this.Config.CleanupGroundSeeds == true && added && tree.growthStage.Value == Tree.seedStage)
                             {
                                 seedsToRemove.Add(tile);
                             }

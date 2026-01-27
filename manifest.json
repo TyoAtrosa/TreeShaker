@@ -1,7 +1,7 @@
 {
    "Name": "TreeShaker",
    "Author": "The Atrosa System",
-   "Version": "1.6.0",
+   "Version": "1.6.2",
    "Description": "Automatically shakes seeds from your trees.",
    "UniqueID": "TyoAtrosa.Treeshaker",
    "EntryDll": "TreeShaker.dll",
